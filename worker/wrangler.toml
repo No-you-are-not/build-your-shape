@@ -1,0 +1,7 @@
+name = "build-your-shape-sync"
+main = "src/index.js"
+compatibility_date = "2025-06-01"
+
+[[kv_namespaces]]
+binding = "STATE"
+id = "583bdd32e50c4aaf95213e9016c6f85a"

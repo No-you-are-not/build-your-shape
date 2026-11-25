@@ -62,7 +62,8 @@ export default {
       // Last write wins, but never let an older snapshot overwrite a newer one.
       const current = await env.STATE.get(key, "json");
       if (current && Number(current.updatedAt) > updatedAt) return json({ ok: false, stale: true, ...current }, 409, origin);
-      const record = { state: { checks: s.checks, weights: s.weights, week: Number(s.week) || 1 }, updatedAt };
+      const overrides = s.overrides && typeof s.overrides === "object" ? s.overrides : {};
+      const record = { state: { checks: s.checks, weights: s.weights, overrides, week: Number(s.week) || 1 }, updatedAt };
       await env.STATE.put(key, JSON.stringify(record));
       return json({ ok: true, updatedAt }, 200, origin);
     }
